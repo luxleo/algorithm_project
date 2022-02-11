@@ -1,6 +1,5 @@
 import './App.scss';
 import RouteTracker from './RouteTracker/RouteTracker';
-import Practice from './Practice/Practice';
 
 function App() {
 	return (

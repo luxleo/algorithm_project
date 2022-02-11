@@ -2,7 +2,16 @@ import React from 'react';
 import './Node.scss';
 
 const Node = (props) => {
-	const { isStart, isEnd, isWall, col, row } = props;
+	const {
+		isStart,
+		isEnd,
+		isWall,
+		col,
+		row,
+		onMouseDown,
+		onMouseEnter,
+		onMouseUp,
+	} = props;
 	const optionalClassName = isEnd
 		? 'node-end'
 		: isStart
@@ -14,6 +23,9 @@ const Node = (props) => {
 		<div
 			id={`node-${row}-${col}`}
 			className={`node ${optionalClassName}`}
+			onMouseDown={() => onMouseDown(row, col)}
+			onMouseEnter={() => onMouseEnter(row, col)}
+			onMouseUp={() => onMouseUp(row, col)}
 		></div>
 	);
 };

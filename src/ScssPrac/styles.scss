@@ -1,0 +1,29 @@
+@mixin square($size) {
+	$calculated: 16px * $size;
+	width: $calculated;
+	height: $calculated;
+}
+.SassComp {
+	display: flex;
+	.box {
+		background: red;
+		cursor: pointer;
+		transition: all 0.3s ease-in-out;
+		&.red {
+			background: red;
+			@include square(1);
+		}
+		&.orange {
+			background: orange;
+			@include square(2);
+		}
+		&.yellow {
+			background: yellow;
+			@include square(3);
+		}
+		&.green {
+			background: greenyellow;
+			@include square(4);
+		}
+	}
+}

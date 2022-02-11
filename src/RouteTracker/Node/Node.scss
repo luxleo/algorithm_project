@@ -3,13 +3,20 @@
 	height: 50px;
 	outline: 1px solid gray;
 	display: inline-block;
+
+	&.node-wall {
+		background-color: blanchedalmond;
+	}
+	&.node-visited {
+		background-color: aqua;
+	}
+	&.node-shortest-route {
+		background-color: aliceblue;
+	}
 	&.node-end {
 		background-color: powderblue;
 	}
 	&.node-start {
 		background-color: chocolate;
-	}
-	&.node-wall {
-		background-color: blanchedalmond;
 	}
 }

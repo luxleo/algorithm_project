@@ -58,9 +58,44 @@ const RouteTracker = () => {
 	const handleMouseUp = (row, col) => {
 		setmousePressed(false);
 	};
+	const processTrack = (track, nodesInShortestRoute) => {
+		for (let i = 0; i <= track.length; i++) {
+			if (i === track.length) {
+				setTimeout(() => {
+					processShortestRoute(nodesInShortestRoute);
+				}, 2 * i);
+				return;
+			}
+			if (i === 0 || i === track.length - 1) continue;
+			setTimeout(() => {
+				const currentNode = track[i];
+				document.getElementById(
+					`node-${currentNode.row}-${currentNode.col}`
+				).className = 'node node-visited';
+			}, 1 * i);
+		}
+	};
+	const processShortestRoute = (nodesInShortestRoute) => {
+		for (let i = 0; i < nodesInShortestRoute.length; i++) {
+			setTimeout(() => {
+				const node = nodesInShortestRoute[i];
+				document.getElementById(`node-${node.row}-${node.col}`).className =
+					'node node-shortest-route';
+			}, 30 * i);
+		}
+	};
+	const initiateBfs = () => {
+		const startNode = graph[start_node_row][start_node_col];
+		const endNode = graph[end_node_row][end_node_col];
+		const trackOfFindingNode = bfs(graph, startNode, endNode);
+		console.log(trackOfFindingNode.length);
+		const nodesInShortestRoute = getNodesInShortestRoute(endNode);
+		processTrack(trackOfFindingNode, nodesInShortestRoute);
+	};
 
 	return (
 		<>
+			<button onClick={() => initiateBfs()}>Initiate BFS</button>
 			<div className="graph">
 				{graph.map((row, rowidx) => {
 					return (

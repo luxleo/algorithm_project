@@ -20,13 +20,15 @@ const Node = (props) => {
 		? 'node-wall'
 		: '';
 	return (
-		<div
-			id={`node-${row}-${col}`}
-			className={`node ${optionalClassName}`}
-			onMouseDown={() => onMouseDown(row, col)}
-			onMouseEnter={() => onMouseEnter(row, col)}
-			onMouseUp={() => onMouseUp(row, col)}
-		></div>
+		<>
+			<div
+				id={`node-${row}-${col}`}
+				className={`node ${optionalClassName}`}
+				onMouseDown={() => onMouseDown(row, col)}
+				onMouseEnter={() => onMouseEnter(row, col)}
+				onMouseUp={() => onMouseUp(row, col)}
+			></div>
+		</>
 	);
 };
 

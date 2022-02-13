@@ -1,0 +1,15 @@
+.button-container {
+	display: flex;
+}
+.graph {
+	margin: 100px 0 0;
+	margin-top: 20px;
+
+	.result-displayer {
+		margin-bottom: 0px;
+	}
+	.node-wrapper {
+		padding: 0px;
+		margin-top: -2px;
+	}
+}

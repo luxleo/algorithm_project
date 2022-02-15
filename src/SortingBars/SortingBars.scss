@@ -1,0 +1,11 @@
+.container {
+	margin: 100px auto;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	.bar {
+		width: 2px;
+		display: inline-block;
+		margin: 0 1px;
+	}
+}

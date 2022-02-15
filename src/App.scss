@@ -1,5 +1,17 @@
 .App {
 	text-align: center;
+	background-color: #282c34;
+	color: aliceblue;
+	min-height: 100vh;
+	&.navBar {
+		display: flex;
+		justify-content: center;
+		&.navlink {
+			color: rgb(231, 230, 230);
+			text-decoration: none;
+			padding: 0 5px;
+		}
+	}
 }
 
 .App-logo {
@@ -15,7 +27,6 @@
 
 .App-header {
 	background-color: #282c34;
-	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

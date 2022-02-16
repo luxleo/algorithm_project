@@ -23,7 +23,7 @@ const SortingBars = () => {
 			arr.push(randomIntFromRange(5, 230));
 		}
 		setbars(arr);
-	});
+	}, [bars]);
 	useEffect(() => createBars());
 
 	const quickSort = useCallback(() => {

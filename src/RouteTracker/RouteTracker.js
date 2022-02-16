@@ -46,8 +46,6 @@ const RouteTracker = () => {
 		setgraph(getInitialGraph());
 	}, []);
 
-	const backupGraph = graph.slice();
-
 	const handleMouseDown = (row, col) => {
 		const newGraph = renewGraphOnWallToggle(graph, row, col);
 		setgraph(newGraph);
@@ -121,14 +119,7 @@ const RouteTracker = () => {
 		setgraph(getInitialGraph());
 		document.getElementById('result').innerText = `result:  ${0}`;
 	};
-	const showResult = () => {
-		const trackedNodes = document.getElementsByClassName('node node-visited');
-		if (trackedNodes.length === 0) {
-			return 'Not Yet';
-		} else {
-			return trackedNodes.length;
-		}
-	};
+
 	return (
 		<>
 			<div className={'button-container'}>

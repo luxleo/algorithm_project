@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './SortingBars.scss';
 import { getQuickSortSequence } from '../algorithms/sorting';
-const processing_speed = 1;
 const number_of_bars = 150;
 const initial_color = 'rgb(219, 219, 219)';
 const randomIntFromRange = (min, max) => {
@@ -61,12 +60,6 @@ const SortingBars = () => {
 			setTimeout(() => {
 				postTargetBar[i].className = 'bar bar-completed';
 			}, i * 10);
-		}
-	};
-	const undoClassName = () => {
-		const targetClass = document.getElementsByClassName('bar bar-completed');
-		for (let i = 0; i < targetClass.length; i++) {
-			targetClass[i].className = 'bar';
 		}
 	};
 	const testSortingAlgorithm = () => {

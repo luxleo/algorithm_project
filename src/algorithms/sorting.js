@@ -11,8 +11,6 @@ function quickSortHelper(arr, start, end, sequence) {
 	const pivot = start;
 	let left = start + 1;
 	let right = end;
-	sequence.push([left]);
-	sequence.push([right]);
 	while (left <= right) {
 		while (left <= end && arr[left] <= arr[pivot]) {
 			left += 1;
@@ -23,19 +21,13 @@ function quickSortHelper(arr, start, end, sequence) {
 			sequence.push([right]);
 		}
 		if (left > right) {
-			let tmp = 0;
-			tmp = arr[right];
-			arr[right] = arr[pivot];
-			arr[pivot] = tmp;
+			[arr[right], arr[pivot]] = [arr[pivot], arr[right]];
 			sequence.push([right, arr[right], pivot, arr[pivot]]);
 		} else {
-			let tmp = 0;
-			tmp = arr[left];
-			arr[left] = arr[right];
-			arr[right] = tmp;
+			[arr[left], arr[right]] = [arr[right], arr[left]];
 			sequence.push([left, arr[left], right, arr[right]]);
 		}
-		quickSortHelper(arr, start, right - 1, sequence);
-		quickSortHelper(arr, right + 1, end, sequence);
 	}
+	quickSortHelper(arr, start, right - 1, sequence);
+	quickSortHelper(arr, right + 1, end, sequence);
 }

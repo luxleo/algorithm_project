@@ -24,7 +24,7 @@ const SortingBars = () => {
 		}
 		setbars(arr);
 	});
-	useEffect(() => createBars(), []);
+	useEffect(() => createBars());
 
 	const quickSort = useCallback(() => {
 		const processArr = getQuickSortSequence(bars);

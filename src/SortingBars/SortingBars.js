@@ -17,14 +17,14 @@ function arraysAreEqual(arrayOne, arrayTwo) {
 }
 const SortingBars = () => {
 	const [bars, setbars] = useState([]);
-	const createBars = useCallback(() => {
+	const createBars = () => {
 		const arr = [];
 		for (let i = 0; i < number_of_bars; i++) {
 			arr.push(randomIntFromRange(5, 230));
 		}
 		setbars(arr);
-	}, [bars]);
-	useEffect(() => createBars());
+	};
+	useEffect(() => createBars(), []);
 
 	const quickSort = useCallback(() => {
 		const processArr = getQuickSortSequence(bars);

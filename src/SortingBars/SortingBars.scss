@@ -1,11 +1,68 @@
+@mixin animation(
+	$name,
+	$duration,
+	$timing-funtion,
+	$delay,
+	$direction,
+	$iteration-count,
+	$fill-mode,
+	$play-state
+) {
+	animation-name: $name;
+	animation-duration: $duration;
+	animation-timing-function: $timing-funtion;
+	animation-delay: $delay;
+	animation-direction: $direction;
+	animation-iteration-count: $iteration-count;
+	animation-fill-mode: $fill-mode;
+	animation-play-state: $play-state;
+}
+@mixin keyframe($animation-name) {
+	@keyframes #{$animation-name} {
+		@content;
+	}
+}
+@include keyframe(sortedAnimation) {
+	0% {
+		background-color: rgb(219, 219, 219);
+	}
+	5% {
+		transform: scale(0.4);
+		background-color: rgb(200, 32, 20);
+		border-radius: 100%;
+	}
+	50% {
+		background-color: rgb(207, 128, 63);
+	}
+	75% {
+		transform: scale(1.1);
+		background-color: rgb(228, 216, 107);
+	}
+	100% {
+		transform: scale(1);
+		background-color: rgb(246, 198, 135);
+	}
+}
 .container {
 	margin: 100px auto;
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
-	.bar {
-		width: 2px;
-		display: inline-block;
-		margin: 0 1px;
+}
+.bar {
+	width: 2px;
+	display: inline-block;
+	margin: 0 1px;
+	&.bar-completed {
+		@include animation(
+			sortedAnimation,
+			1s,
+			ease-out,
+			0,
+			alternate,
+			2,
+			forwards,
+			running
+		);
 	}
 }

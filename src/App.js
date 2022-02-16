@@ -9,16 +9,29 @@ function App() {
 			<header className="App-header"></header>
 			<BrowserRouter>
 				<div className="navBar">
-					<Link to="Home" className="navlink">
-						Home
-					</Link>
-					<Link to="route-tracker" className="navlink">
-						Route Tracker
-					</Link>
+					<div>
+						<Link to="Home" className="navlink">
+							Home
+						</Link>
+					</div>
+					<div>
+						<Link to="route-tracker" className="navlink">
+							Route Tracker
+						</Link>
+					</div>
+					<div>
+						<Link
+							to="sorting-bars"
+							className="navlink"
+							element={<SortingBars />}
+						>
+							Sorting Bars
+						</Link>
+					</div>
 				</div>
 				<Routes>
 					<Route path="route-tracker" element={<RouteTracker />} />
-					<Route path="/" element={<SortingBars />} />
+					<Route path="sorting-bars" element={<SortingBars />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

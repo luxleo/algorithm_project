@@ -3,10 +3,14 @@
 	background-color: #282c34;
 	color: aliceblue;
 	min-height: 100vh;
-	&.navBar {
+	.navBar {
 		display: flex;
 		justify-content: center;
-		&.navlink {
+		flex-direction: row;
+		div {
+			outline: 1px solid;
+		}
+		.navlink {
 			color: rgb(231, 230, 230);
 			text-decoration: none;
 			padding: 0 5px;

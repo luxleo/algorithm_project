@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './SortingBars.scss';
 import { getQuickSortSequence } from '../algorithms/sorting';
 const processing_speed = 1;
-const number_of_bars = 250;
+const number_of_bars = 150;
 const initial_color = 'rgb(219, 219, 219)';
 const randomIntFromRange = (min, max) => {
 	return Math.floor(Math.random() * (max - min + 1) + min);
@@ -18,6 +18,7 @@ function arraysAreEqual(arrayOne, arrayTwo) {
 }
 const SortingBars = () => {
 	const [bars, setbars] = useState([]);
+	const [isSortDone, setisSortDone] = useState(false);
 	const createBars = useCallback(() => {
 		const arr = [];
 		for (let i = 0; i < number_of_bars; i++) {
@@ -26,6 +27,7 @@ const SortingBars = () => {
 		setbars(arr);
 	}, []);
 	useEffect(() => createBars(), []);
+
 	const quickSort = useCallback(() => {
 		const processArr = getQuickSortSequence(bars);
 		for (let i = 0; i < processArr.length; i++) {
@@ -40,16 +42,33 @@ const SortingBars = () => {
 					barTwoStyle.height = `${twoHeight}px`;
 					barOneStyle.backgroundColor = 'rgb(85, 148, 199)';
 					barTwoStyle.backgroundColor = 'rgb(85, 148, 199)';
-				}, i * 4);
+				}, i * 3);
 			} else {
 				const [targetIdx] = processArr[i];
 				const barStyle = targetBars[targetIdx].style;
 				setTimeout(() => {
 					barStyle.backgroundColor = 'blue';
 				}, i * 2);
+				setTimeout(() => {
+					barStyle.backgroundColor = 'rgb(85, 148, 199)';
+				}, i * 4);
 			}
 		}
 	}, [bars]);
+	const makePostEffect = () => {
+		const postTargetBar = document.getElementsByClassName('bar');
+		for (let i = 0; i < postTargetBar.length; i++) {
+			setTimeout(() => {
+				postTargetBar[i].className = 'bar bar-completed';
+			}, i * 10);
+		}
+	};
+	const undoClassName = () => {
+		const targetClass = document.getElementsByClassName('bar bar-completed');
+		for (let i = 0; i < targetClass.length; i++) {
+			targetClass[i].className = 'bar';
+		}
+	};
 	const testSortingAlgorithm = () => {
 		for (let i = 0; i < 100; i++) {
 			const array = [];
@@ -68,7 +87,7 @@ const SortingBars = () => {
 				{bars.map((value, idx) => (
 					<div
 						key={idx}
-						className="bar"
+						className={isSortDone ? 'bar bar-completed' : 'bar'}
 						style={{
 							backgroundColor: initial_color,
 							height: `${value}px`,
@@ -79,6 +98,7 @@ const SortingBars = () => {
 			<div>
 				<button onClick={quickSort}>quickSort</button>
 				<button onClick={createBars}>refresh</button>
+				<button onClick={() => makePostEffect()}>effect!</button>
 				<button onClick={() => testSortingAlgorithm()}>test algorithm</button>
 			</div>
 		</>

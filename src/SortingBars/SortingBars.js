@@ -17,21 +17,20 @@ function arraysAreEqual(arrayOne, arrayTwo) {
 }
 const SortingBars = () => {
 	const [bars, setbars] = useState([]);
-	const [isSortDone, setisSortDone] = useState(false);
 	const createBars = useCallback(() => {
 		const arr = [];
 		for (let i = 0; i < number_of_bars; i++) {
 			arr.push(randomIntFromRange(5, 230));
 		}
 		setbars(arr);
-	}, []);
+	});
 	useEffect(() => createBars(), []);
 
 	const quickSort = useCallback(() => {
 		const processArr = getQuickSortSequence(bars);
 		for (let i = 0; i < processArr.length; i++) {
 			const targetBars = document.getElementsByClassName('bar');
-			const isColorChange = processArr[i].length == 4;
+			const isColorChange = processArr[i].length === 4;
 			if (isColorChange) {
 				const [oneIdx, oneHeight, twoIdx, twoHeight] = processArr[i];
 				const barOneStyle = targetBars[oneIdx].style;
@@ -54,14 +53,6 @@ const SortingBars = () => {
 			}
 		}
 	}, [bars]);
-	const makePostEffect = () => {
-		const postTargetBar = document.getElementsByClassName('bar');
-		for (let i = 0; i < postTargetBar.length; i++) {
-			setTimeout(() => {
-				postTargetBar[i].className = 'bar bar-completed';
-			}, i * 10);
-		}
-	};
 	const testSortingAlgorithm = () => {
 		for (let i = 0; i < 100; i++) {
 			const array = [];
@@ -80,7 +71,7 @@ const SortingBars = () => {
 				{bars.map((value, idx) => (
 					<div
 						key={idx}
-						className={isSortDone ? 'bar bar-completed' : 'bar'}
+						className={'bar'}
 						style={{
 							backgroundColor: initial_color,
 							height: `${value}px`,
@@ -91,7 +82,6 @@ const SortingBars = () => {
 			<div>
 				<button onClick={quickSort}>quickSort</button>
 				<button onClick={createBars}>refresh</button>
-				<button onClick={() => makePostEffect()}>effect!</button>
 				<button onClick={() => testSortingAlgorithm()}>test algorithm</button>
 			</div>
 		</>

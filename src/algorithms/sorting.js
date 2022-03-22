@@ -1,33 +1,36 @@
 export function getQuickSortSequence(arr) {
-	const sequence = [];
 	if (arr.length <= 1) return arr;
-	const tmparr = arr.slice();
-	quickSortHelper(tmparr, 0, tmparr.length - 1, sequence);
+	sequence = [];
+	tmpArr = [];
+	tmpArr = arr.slice();
+	quickSortHelper(0, tmpArr.length - 1);
 	return sequence;
 }
+var sequence = [];
+var tmpArr = [];
 
-function quickSortHelper(arr, start, end, sequence) {
+function quickSortHelper(start, end) {
 	if (start >= end) return;
 	const pivot = start;
 	let left = start + 1;
 	let right = end;
 	while (left <= right) {
-		while (left <= end && arr[left] <= arr[pivot]) {
+		while (left <= end && tmpArr[left] <= tmpArr[pivot]) {
 			left += 1;
 			sequence.push([left]);
 		}
-		while (right > start && arr[right] >= arr[pivot]) {
+		while (right > start && tmpArr[right] > tmpArr[pivot]) {
 			right -= 1;
 			sequence.push([right]);
 		}
 		if (left > right) {
-			[arr[right], arr[pivot]] = [arr[pivot], arr[right]];
-			sequence.push([right, arr[right], pivot, arr[pivot]]);
+			[tmpArr[right], tmpArr[pivot]] = [tmpArr[pivot], tmpArr[right]];
+			sequence.push([right, tmpArr[right], pivot, tmpArr[pivot]]);
 		} else {
-			[arr[left], arr[right]] = [arr[right], arr[left]];
-			sequence.push([left, arr[left], right, arr[right]]);
+			[tmpArr[left], tmpArr[right]] = [tmpArr[right], tmpArr[left]];
+			sequence.push([left, tmpArr[left], right, tmpArr[right]]);
 		}
 	}
-	quickSortHelper(arr, start, right - 1, sequence);
-	quickSortHelper(arr, right + 1, end, sequence);
+	quickSortHelper(start, right - 1);
+	quickSortHelper(right + 1, end);
 }

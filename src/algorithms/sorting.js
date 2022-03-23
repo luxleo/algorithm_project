@@ -34,3 +34,45 @@ function quickSortHelper(start, end) {
 	quickSortHelper(start, right - 1);
 	quickSortHelper(right + 1, end);
 }
+var sequence2 = [];
+var tmpArr2 = [];
+export function getSelectionSortSequence(arr) {
+	sequence2 = [];
+	tmpArr2 = [];
+	tmpArr2 = arr.slice();
+	selectionSortHelper();
+	return sequence2;
+}
+function selectionSortHelper() {
+	for (let i = 0; i < tmpArr2.length - 1; i++) {
+		let min_idx = i;
+		for (let j = i + 1; j < tmpArr2.length; j++) {
+			if (tmpArr2[j] < tmpArr2[min_idx]) {
+				min_idx = j;
+			}
+			sequence2.push([j]);
+		}
+		[tmpArr2[i], tmpArr2[min_idx]] = [tmpArr2[min_idx], tmpArr2[i]];
+		sequence2.push([i, tmpArr2[i], min_idx, tmpArr2[min_idx]]);
+	}
+}
+export function getInsertionSortSequence(arr) {
+	sequence2 = [];
+	tmpArr2 = [];
+	tmpArr2 = arr.slice();
+	insertionSortHelper();
+	return sequence2;
+}
+function insertionSortHelper() {
+	for (let i = 1; i < tmpArr2.length; i++) {
+		for (let j = i; j > 0; j--) {
+			sequence2.push([j]);
+			if (tmpArr2[j] < tmpArr2[j - 1]) {
+				[tmpArr2[j], tmpArr2[j - 1]] = [tmpArr2[j - 1], tmpArr2[j]];
+				sequence2.push([j, tmpArr2[j], j - 1, tmpArr2[j - 1]]);
+			} else {
+				break;
+			}
+		}
+	}
+}

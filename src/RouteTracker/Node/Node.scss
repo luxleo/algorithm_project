@@ -37,12 +37,12 @@
 	}
 	100% {
 		transform: scale(1);
-		background-color: rgb(139, 83, 9);
+		background-color: rgb(250, 251, 153);
 	}
 }
 @include keyframe(routeAnimation) {
 	0% {
-		transform: scale(0.2);
+		transform: scale(0.5);
 		background-color: aliceblue;
 		border-radius: 50%;
 	}
@@ -82,7 +82,7 @@
 	}
 	100% {
 		transform: scale(1);
-		background-color: rgb(116, 84, 9);
+		background-color: rgb(255, 255, 255);
 	}
 }
 .node {
@@ -131,7 +131,7 @@
 		);
 	}
 	&.node-end {
-		background-color: rgb(255, 255, 255);
+		background-color: rgb(226, 51, 35);
 	}
 	&.node-start {
 		background-color: rgb(250, 165, 68);

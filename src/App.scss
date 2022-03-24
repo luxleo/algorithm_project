@@ -3,17 +3,53 @@
 	background-color: #282c34;
 	color: aliceblue;
 	min-height: 100vh;
-	.navBar {
+	.navContainer {
 		display: flex;
 		justify-content: center;
-		flex-direction: row;
-		div {
-			outline: 1px solid;
-		}
-		.navlink {
-			color: rgb(231, 230, 230);
-			text-decoration: none;
-			padding: 0 5px;
+		.navBar {
+			width: 40%;
+			display: flex;
+			justify-content: space-around;
+			flex-direction: row;
+			.navDiv {
+				position: relative;
+				display: inline-block;
+				font-size: 1rem;
+				padding: 5px 10px;
+				&::before {
+					content: '';
+					position: absolute;
+					width: calc(100% - 6px);
+					height: calc(100% - 6px);
+					left: 0;
+					bottom: 0;
+					z-index: 1;
+					transition: transform 0.3s ease;
+				}
+				&::after {
+					content: '';
+					width: calc(100% - 6px);
+					height: calc(100% - 6px);
+					position: absolute;
+					left: 0;
+					bottom: 0;
+					z-index: 1;
+					transition: transform 0.3s ease;
+				}
+				&:hover::before {
+					transform: translate(-5px, 5px);
+					border: 2px solid orange;
+				}
+				&:hover::after {
+					transform: translate(5px, -5px);
+					border: 2px solid orange;
+				}
+			}
+			.navlink {
+				color: rgb(231, 230, 230);
+				text-decoration: none;
+				padding: 0 5px;
+			}
 		}
 	}
 }

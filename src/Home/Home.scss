@@ -1,0 +1,29 @@
+.homecontainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.card_link {
+		display: flex;
+		width: 40vw;
+		justify-content: space-around;
+		align-items: center;
+		height: 90vh;
+		.card {
+			display: flex;
+			text-decoration: none;
+			justify-content: center;
+			align-items: center;
+			border: 2px solid white;
+			height: 40vh;
+			width: 30vh;
+			color: white;
+			&:hover {
+				border: 2px solid rgb(250, 178, 45);
+				box-shadow: 10px -10px 25px 0 rgb(241, 222, 55),
+					-10px 10px 25px 0 rgba(255, 158, 48, 0.945);
+				text-shadow: 3px 3px 10px rgb(241, 222, 55),
+					-3px -3px 10px rgba(255, 158, 48, 0.945);
+			}
+		}
+	}
+}

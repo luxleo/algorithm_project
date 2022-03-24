@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SortingBars.scss';
 import {
 	getQuickSortSequence,
@@ -83,7 +83,6 @@ const SortingBars = () => {
 		let displayChoice = N === 1 ? 'first_bars' : 'second_bars';
 		let barDisplayChoice = N === 1 ? '' : 's';
 		const procedureArr = getInsertionSortSequence(barsTwo);
-		let step = 0;
 		for (let i = 0; i < procedureArr.length; i++) {
 			const [oneIdx, oneHeight, twoIdx, twoHeight] = procedureArr[i];
 			const barOne = document.getElementById(`${oneIdx}` + barDisplayChoice);
@@ -93,13 +92,10 @@ const SortingBars = () => {
 			setTimeout(() => {
 				barOneStyle.height = `${oneHeight}px`;
 				barTwoStyle.height = `${twoHeight}px`;
-				step = `${i}`;
 
 				document.getElementById(`${displayChoice}`).innerHTML = `${step}`;
 				if (i === procedureArr.length - 1) {
-					document.getElementById(
-						`${displayChoice}`
-					).innerHTML = `${step} steps`;
+					document.getElementById(`${displayChoice}`).innerHTML = `${i} steps`;
 				}
 			}, i);
 		}

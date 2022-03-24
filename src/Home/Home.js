@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import RouteTracker from '../RouteTracker/RouteTracker';
 import SortingBars from '../SortingBars/SortingBars';
 import './Home.scss';

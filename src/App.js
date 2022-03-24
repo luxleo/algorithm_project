@@ -29,6 +29,22 @@ function App() {
 						</Link>
 					</div>
 				</div>
+				<div className="card_link">
+					<div className="card">
+						<Link to="route-tracker" className="navlink">
+							Route Tracker
+						</Link>
+					</div>
+					<div className="card">
+						<Link
+							to="sorting-bars"
+							className="navlink"
+							element={<SortingBars />}
+						>
+							Sorting Bars
+						</Link>
+					</div>
+				</div>
 				<Routes>
 					<Route path="route-tracker" element={<RouteTracker />} />
 					<Route path="sorting-bars" element={<SortingBars />} />

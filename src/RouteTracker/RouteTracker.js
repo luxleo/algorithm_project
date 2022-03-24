@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Node from './Node/Node';
 import './RouteTracker.scss';
 import { bfs, getNodesInShortestRoute } from '../algorithms/bfs';
-const start_node_row = 8;
-const start_node_col = 2;
-const end_node_row = 8;
-const end_node_col = 35;
+let start_node_row = 8;
+let start_node_col = 2;
+let end_node_row = 8;
+let end_node_col = 35;
 const createNode = (row, col) => {
 	return {
 		row,
@@ -42,21 +42,40 @@ const renewGraphOnWallToggle = (graph, row, col) => {
 const RouteTracker = () => {
 	const [graph, setgraph] = useState([]);
 	const [mousePressed, setmousePressed] = useState(false);
+	const [startPressed, setstartPressed] = useState(false);
+	const [endPressed, setendPressed] = useState(false);
 	useEffect(() => {
 		setgraph(getInitialGraph());
 	}, []);
 
 	const handleMouseDown = (row, col) => {
-		const newGraph = renewGraphOnWallToggle(graph, row, col);
-		setgraph(newGraph);
-		setmousePressed(true);
+		if (row === start_node_row && col === start_node_col) {
+			setstartPressed(true);
+		} else if (row === end_node_row && col === end_node_col) {
+			setendPressed(true);
+		} else {
+			const newGraph = renewGraphOnWallToggle(graph, row, col);
+			setgraph(newGraph);
+			setmousePressed(true);
+		}
 	};
 	const handleMouseEnter = (row, col) => {
+		if (startPressed) {
+			start_node_row = row;
+			start_node_col = col;
+			setgraph(getInitialGraph());
+		} else if (endPressed) {
+			end_node_row = row;
+			end_node_col = col;
+			setgraph(getInitialGraph());
+		}
 		if (!mousePressed) return;
 		const newGraph = renewGraphOnWallToggle(graph, row, col);
 		setgraph(newGraph);
 	};
 	const handleMouseUp = (row, col) => {
+		setendPressed(false);
+		setstartPressed(false);
 		setmousePressed(false);
 	};
 	const processTrack = (track, nodesInShortestRoute) => {
@@ -116,6 +135,10 @@ const RouteTracker = () => {
 				nodesInShortestRoutes[i].className = 'node';
 			}
 		}
+		start_node_row = 8;
+		start_node_col = 2;
+		end_node_row = 8;
+		end_node_col = 35;
 		setgraph(getInitialGraph());
 		document.getElementById('result').innerText = `result:  ${0}`;
 	};
@@ -123,10 +146,14 @@ const RouteTracker = () => {
 	return (
 		<>
 			<div className={'button-container'}>
-				<button onClick={() => initiateBfs()}>Initiate BFS</button>
-				<button onClick={() => undoBfs()}>Reset</button>
+				<div className="btn_s" onClick={() => initiateBfs()}>
+					Initiate BFS
+				</div>
+				<div className="btn_s" onClick={() => undoBfs()}>
+					Reset
+				</div>
 			</div>
-			<p id="result" className="result displayer">
+			<p id="result" className="result_displayer">
 				result: {0}
 			</p>
 			<div className="graph">

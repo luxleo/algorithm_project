@@ -66,7 +66,6 @@ export function getInsertionSortSequence(arr) {
 function insertionSortHelper() {
 	for (let i = 1; i < tmpArr2.length; i++) {
 		for (let j = i; j > 0; j--) {
-			sequence2.push([j]);
 			if (tmpArr2[j] < tmpArr2[j - 1]) {
 				[tmpArr2[j], tmpArr2[j - 1]] = [tmpArr2[j - 1], tmpArr2[j]];
 				sequence2.push([j, tmpArr2[j], j - 1, tmpArr2[j - 1]]);

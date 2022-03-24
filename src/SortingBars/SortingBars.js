@@ -6,22 +6,17 @@ import {
 	getInsertionSortSequence,
 } from '../algorithms/sorting';
 const number_of_bars = 120;
-const initial_color = 'rgb(219, 219, 219)';
+const initial_color = 'rgb(230,226,203)';
 const randomIntFromRange = (min, max) => {
 	return Math.floor(Math.random() * (max - min + 1) + min);
 };
-function arraysAreEqual(arrayOne, arrayTwo) {
-	if (arrayOne.length !== arrayTwo.length) return false;
-	for (let i = 0; i < arrayOne.length; i++) {
-		if (arrayOne[i] !== arrayTwo[i]) {
-			return false;
-		}
-	}
-	return true;
-}
 const SortingBars = () => {
 	const [bars, setbars] = useState([]);
 	const [barsTwo, setbarsTwo] = useState([]);
+	const [startCondition, setstartCondition] = useState({
+		first: '',
+		second: '',
+	});
 	const createBars = () => {
 		const arr = [];
 		for (let i = 0; i < number_of_bars; i++) {
@@ -34,91 +29,79 @@ const SortingBars = () => {
 	};
 	useEffect(() => createBars(), []);
 
-	const quickSort = () => {
+	const quickSort = (N) => {
+		let displayChoice = N === 1 ? 'first_bars' : 'second_bars';
+		let barDisplayChoice = N === 1 ? '' : 's';
 		const processArr = getQuickSortSequence(bars);
-		let step = 0;
 		for (let i = 0; i < processArr.length; i++) {
-			const isColorChange = processArr[i].length === 4;
-			if (isColorChange) {
-				const [oneIdx, oneHeight, twoIdx, twoHeight] = processArr[i];
-				const barOneStyle = document.getElementById(`${oneIdx}`).style;
-				const barTwoStyle = document.getElementById(`${twoIdx}`).style;
+			const isPosChange = processArr[i].length === 4;
+			if (isPosChange) {
+				const [fIdx, fVal, sIdx, sVal] = processArr[i];
+				const bar1 = document.getElementById(`${fIdx}` + barDisplayChoice);
+				const bar2 = document.getElementById(`${sIdx}` + barDisplayChoice);
+				const bar1Style = bar1.style;
+				const bar2Style = bar2.style;
 				setTimeout(() => {
-					barOneStyle.height = `${oneHeight}px`;
-					barTwoStyle.height = `${twoHeight}px`;
-					barOneStyle.backgroundColor = 'rgb(85, 148, 199)';
-					barTwoStyle.backgroundColor = 'rgb(85, 148, 199)';
-					step = `${i}`;
+					bar1Style.height = `${fVal}px`;
+					bar2Style.height = `${sVal}px`;
+					document.getElementById(`${displayChoice}`).innerHTML = `${i}`;
 					if (i === processArr.length - 1) {
-						step = `${i} steps.`;
+						document.getElementById(
+							`${displayChoice}`
+						).innerHTML = `${i} steps`;
 					}
-					document.querySelector('#first_bars').innerHTML = `${step}`;
 				}, i * 2);
-			} /*else {
-				const [targetIdx] = processArr[i];
-				const barStyle = document.getElementById(`${targetIdx}`).style;
-				setTimeout(() => {
-					barStyle.backgroundColor = 'blue';
-				}, i * 2);
-			}*/
-		}
-	};
-	const selectionSort = () => {
-		const procedureArr = getSelectionSortSequence(barsTwo);
-		let step = 0;
-		for (let i = 0; i < procedureArr.length; i++) {
-			const isColorChange = procedureArr[i].length === 4;
-			if (isColorChange) {
-				const [oneIdx, oneHeight, twoIdx, twoHeight] = procedureArr[i];
-				const barOneStyle = document.getElementById(`${oneIdx}s`).style;
-				const barTwoStyle = document.getElementById(`${twoIdx}s`).style;
-				setTimeout(() => {
-					barOneStyle.height = `${oneHeight}px`;
-					barTwoStyle.height = `${twoHeight}px`;
-					barOneStyle.backgroundColor = 'rgb(85, 148, 199)';
-					barTwoStyle.backgroundColor = 'rgb(85, 148, 199)';
-					step = `${i}`;
-					if (i === procedureArr.length - 1) {
-						step = `${i} steps.`;
-					}
-					document.querySelector('#second_bars').innerHTML = `${step}`;
-				}, i);
 			}
 		}
 	};
-	const insertionSort = () => {
+	const selectionSort = (N) => {
+		let displayChoice = N === 1 ? 'first_bars' : 'second_bars';
+		let barDisplayChoice = N === 1 ? '' : 's';
+		const procedureArr = getSelectionSortSequence(barsTwo);
+		for (let i = 0; i < procedureArr.length; i++) {
+			const isPosChange = procedureArr[i].length === 4;
+			if (isPosChange) {
+				const [fidx, fval, sidx, sval] = procedureArr[i];
+				const barOne = document.getElementById(`${fidx}` + barDisplayChoice);
+				const barTwo = document.getElementById(`${sidx}` + barDisplayChoice);
+				setTimeout(() => {
+					barOne.style.height = `${fval}px`;
+					barTwo.style.height = `${sval}px`;
+					document.getElementById(`${displayChoice}`).innerHTML = `${i}`;
+					if (i === procedureArr.length - 1) {
+						document.getElementById(
+							`${displayChoice}`
+						).innerHTML = `${i} steps`;
+					}
+				}, i);
+			} else {
+				continue;
+			}
+		}
+	};
+	const insertionSort = (N) => {
+		let displayChoice = N === 1 ? 'first_bars' : 'second_bars';
+		let barDisplayChoice = N === 1 ? '' : 's';
 		const procedureArr = getInsertionSortSequence(barsTwo);
 		let step = 0;
 		for (let i = 0; i < procedureArr.length; i++) {
-			const isColorChange = procedureArr[i].length === 4;
-			if (isColorChange) {
-				const [oneIdx, oneHeight, twoIdx, twoHeight] = procedureArr[i];
-				const barOneStyle = document.getElementById(`${oneIdx}s`).style;
-				const barTwoStyle = document.getElementById(`${twoIdx}s`).style;
-				setTimeout(() => {
-					barOneStyle.height = `${oneHeight}px`;
-					barTwoStyle.height = `${twoHeight}px`;
-					barOneStyle.backgroundColor = 'rgb(85, 148, 199)';
-					barTwoStyle.backgroundColor = 'rgb(85, 148, 199)';
-					step = `${i}`;
-					if (i === procedureArr.length - 1) {
-						step = `${i} steps.`;
-					}
-					document.querySelector('#second_bars').innerHTML = `${step}`;
-				}, i);
-			}
-		}
-	};
-	const testSortingAlgorithm = () => {
-		for (let i = 0; i < 100; i++) {
-			const array = [];
-			const length = randomIntFromRange(1, 1000);
-			for (let i = 0; i < length; i++) {
-				array.push(randomIntFromRange(-1000, 1000));
-			}
-			const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
-			const mergeSortedArray = getInsertionSortSequence(array.slice());
-			console.log(arraysAreEqual(javaScriptSortedArray, mergeSortedArray));
+			const [oneIdx, oneHeight, twoIdx, twoHeight] = procedureArr[i];
+			const barOne = document.getElementById(`${oneIdx}` + barDisplayChoice);
+			const barTwo = document.getElementById(`${twoIdx}` + barDisplayChoice);
+			const barOneStyle = barOne.style;
+			const barTwoStyle = barTwo.style;
+			setTimeout(() => {
+				barOneStyle.height = `${oneHeight}px`;
+				barTwoStyle.height = `${twoHeight}px`;
+				step = `${i}`;
+
+				document.getElementById(`${displayChoice}`).innerHTML = `${step}`;
+				if (i === procedureArr.length - 1) {
+					document.getElementById(
+						`${displayChoice}`
+					).innerHTML = `${step} steps`;
+				}
+			}, i);
 		}
 	};
 	return (
@@ -138,13 +121,82 @@ const SortingBars = () => {
 					))}
 				</div>
 				<div className="result1">
+					<p className="algo_selection1">{startCondition['first']}</p>
 					<p id="first_bars"></p>
 				</div>
 
 				<div className="control1">
-					<button onClick={quickSort}>quickSort</button>
-					<button onClick={createBars}>refresh</button>
-					<button onClick={() => testSortingAlgorithm()}>test algorithm</button>
+					<div
+						className="btn_s"
+						onClick={() => {
+							setstartCondition({ ...startCondition, first: 'Q' });
+						}}
+					>
+						Quick Sort
+					</div>
+
+					<div
+						className="btn_s"
+						onClick={() => {
+							setstartCondition({ ...startCondition, first: 'S' });
+						}}
+					>
+						Selection Sort
+					</div>
+					<div
+						className="btn_s"
+						onClick={() => {
+							setstartCondition({ ...startCondition, first: 'I' });
+						}}
+					>
+						Insertion Sort
+					</div>
+				</div>
+				<div className="start_refresh_container">
+					<div
+						className="btn"
+						onClick={() => {
+							if (startCondition['first'] === 'Q') {
+								quickSort(1);
+								if (startCondition['second'] === 'Q') {
+									quickSort();
+								} else if (startCondition['second'] === 'S') {
+									selectionSort();
+								} else if (startCondition['second'] === 'I') {
+									insertionSort();
+								}
+							} else if (startCondition['first'] === 'S') {
+								selectionSort(1);
+								if (startCondition['second'] === 'Q') {
+									quickSort();
+								} else if (startCondition['second'] === 'S') {
+									selectionSort();
+								} else if (startCondition['second'] === 'I') {
+									insertionSort();
+								}
+							} else if (startCondition['first'] === 'I') {
+								insertionSort(1);
+								if (startCondition['second'] === 'Q') {
+									quickSort();
+								} else if (startCondition['second'] === 'S') {
+									selectionSort();
+								} else if (startCondition['second'] === 'I') {
+									insertionSort();
+								}
+							}
+						}}
+					>
+						Start
+					</div>
+					<div
+						className="btn"
+						onClick={() => {
+							createBars();
+							setstartCondition({ first: '', second: '' });
+						}}
+					>
+						Reset
+					</div>
 				</div>
 				<div className="container2">
 					{barsTwo.map((val, idx) => (
@@ -160,12 +212,34 @@ const SortingBars = () => {
 					))}
 				</div>
 				<div className="result2">
+					<p className="algo_selection2">{startCondition['second']}</p>
 					<p id="second_bars"></p>
 				</div>
 				<div className="control2">
-					<button onClick={selectionSort}>Selection Sort</button>
-					<button onClick={createBars}>refresh</button>
-					<button onClick={insertionSort}>insertionSort</button>
+					<div
+						className="btn_s"
+						onClick={() => {
+							setstartCondition({ ...startCondition, second: 'Q' });
+						}}
+					>
+						Quick Sort
+					</div>
+					<div
+						className="btn_s"
+						onClick={() => {
+							setstartCondition({ ...startCondition, second: 'S' });
+						}}
+					>
+						Selection Sort
+					</div>
+					<div
+						className="btn_s"
+						onClick={() => {
+							setstartCondition({ ...startCondition, second: 'I' });
+						}}
+					>
+						Insertion Sort
+					</div>
 				</div>
 			</div>
 		</>

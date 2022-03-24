@@ -1,81 +1,62 @@
-@mixin animation(
-	$name,
-	$duration,
-	$timing-funtion,
-	$delay,
-	$direction,
-	$iteration-count,
-	$fill-mode,
-	$play-state
-) {
-	animation-name: $name;
-	animation-duration: $duration;
-	animation-timing-function: $timing-funtion;
-	animation-delay: $delay;
-	animation-direction: $direction;
-	animation-iteration-count: $iteration-count;
-	animation-fill-mode: $fill-mode;
-	animation-play-state: $play-state;
-}
-@mixin keyframe($animation-name) {
-	@keyframes #{$animation-name} {
-		@content;
-	}
-}
-@include keyframe(sortedAnimation) {
-	0% {
-		background-color: rgb(219, 219, 219);
-	}
-	5% {
-		transform: scale(0.4);
-		background-color: rgb(200, 32, 20);
-		border-radius: 100%;
-	}
-	50% {
-		background-color: rgb(207, 128, 63);
-	}
-	75% {
-		transform: scale(1.1);
-		background-color: rgb(228, 216, 107);
-	}
-	100% {
-		transform: scale(1);
-		background-color: rgb(246, 198, 135);
-	}
-}
 .grid {
 	display: grid;
 	grid-template-columns: 1fr 2fr 1fr;
-	grid-template-rows: repeat(4, 1fr);
+	grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr 2fr;
+	height: 90vh;
 	.result1 {
 		grid-column: 3/4;
-		grid-row: 1;
+		grid-row: 3;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		padding: 0px;
+		.algo_selection1 {
+			font-size: 1rem;
+		}
 		p {
 			font-size: 2rem;
+			padding: 0px;
+			margin: 0px;
+			display: inline-block;
 			text-align: end;
 		}
 	}
 	.result2 {
 		grid-column: 3/4;
-		grid-row: 3;
+		grid-row: 5;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: space-around;
+		.algo_selection2 {
+			margin-top: 10px;
+			font-size: 1rem;
+		}
 		p {
+			margin: 0px;
+			padding: 0px;
+			justify-self: flex-end;
 			font-size: 2rem;
 			text-align: end;
 		}
 	}
 	.control1 {
 		grid-column: 3/4;
-		grid-row: 2;
+		grid-row: 1 / span 2;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: flex-start;
 	}
 	.control2 {
 		grid-column: 3/4;
-		grid-row: 4;
+		grid-row: 6 / span 2;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: flex-start;
 	}
 }
 .container {
@@ -84,30 +65,100 @@
 	justify-content: center;
 	flex-direction: row;
 	grid-column: 2/3;
-	grid-row: 1 / span 2;
+	grid-row: 1 / span 3;
+}
+.start_refresh_container {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: flex-end;
+	grid-column: 3/4;
+	grid-row: 4 / span 1;
+	.btn {
+		overflow: hidden;
+		color: white;
+		position: relative;
+		font-size: 1rem;
+		width: 30%;
+		padding: 5px 10px;
+		border-radius: 30px;
+		box-shadow: 0 0 0 0 rgb(241, 222, 55), 0 0 0 0 rgba(255, 158, 48, 0.945);
+		transition: transform, 0.3s, ease, box-shadow, 0.3s, ease;
+		z-index: 1;
+		&::after {
+			content: '';
+			width: 200px;
+			height: 200px;
+			position: absolute;
+			top: -50px;
+			left: -100px;
+			background-image: linear-gradient(
+				225deg,
+				#edeeac 0%,
+				#eb3737 50%,
+				#f89a20 100%
+			);
+			z-index: -1;
+			transition: transform 0.3s ease;
+		}
+		&:hover {
+			transform: translate(0, -6px);
+			box-shadow: 10px -10px 25px 0 rgb(241, 222, 55),
+				-10px 10px 25px 0 rgba(255, 158, 48, 0.945);
+		}
+		&:hover::after {
+			transform: rotate(150deg);
+		}
+	}
 }
 .container2 {
 	margin: 10px auto;
 	display: flex;
 	justify-content: center;
+	align-items: flex-end;
 	flex-direction: row;
 	grid-column: 2/3;
-	grid-row: 3 / span 2;
+	grid-row: 5 / span 3;
+}
+.btn_s {
+	color: rgb(230, 226, 203);
+	font-size: 1rem;
+	padding: 5px 10px;
+	margin-left: 10px;
+	position: relative;
+	display: inline-block;
+	&::before {
+		border: 2px solid white;
+		content: '';
+		position: absolute;
+		width: calc(100% - 6px);
+		height: calc(100% - 6px);
+		left: 0;
+		bottom: 0;
+		z-index: 1;
+		transition: transform 0.3s ease;
+	}
+	&::after {
+		border: 2px solid white;
+		content: '';
+		width: calc(100% - 6px);
+		height: calc(100% - 6px);
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		z-index: 1;
+		transition: transform 0.3s ease;
+	}
+	&:hover::before {
+		transform: translate(5px, 5px);
+		border: 2px solid orange;
+	}
+	&:hover::after {
+		transform: translate(-5px, -5px);
+		border: 2px solid orange;
+	}
 }
 .bar {
 	width: 2px;
 	display: inline-block;
 	margin: 0 1px;
-	&.bar-completed {
-		@include animation(
-			sortedAnimation,
-			1s,
-			ease-out,
-			0,
-			alternate,
-			2,
-			forwards,
-			running
-		);
-	}
 }

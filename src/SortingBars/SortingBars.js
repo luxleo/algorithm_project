@@ -93,7 +93,7 @@ const SortingBars = () => {
 				barOneStyle.height = `${oneHeight}px`;
 				barTwoStyle.height = `${twoHeight}px`;
 
-				document.getElementById(`${displayChoice}`).innerHTML = `${step}`;
+				document.getElementById(`${displayChoice}`).innerHTML = `${i}`;
 				if (i === procedureArr.length - 1) {
 					document.getElementById(`${displayChoice}`).innerHTML = `${i} steps`;
 				}
